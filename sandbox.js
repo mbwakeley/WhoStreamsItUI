@@ -20,9 +20,7 @@ export default function Home() {
         data={shows}
         renderItem={({ show }) => (
           <Card>
-            <Text style={styles.titleText} show={show}>
-              {show.title}
-            </Text>
+            <Text style={styles.titleText}>{show.title}</Text>
           </Card>
         )}
       />
@@ -142,6 +140,19 @@ const shows = [
     description:
       "Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.\n\nIn quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.\n\nMaecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.\n\nMaecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.",
     platform: "Amazon Prime Video",
+    approved: true,
+    created_at: "2020-02-03T01:12:37.601Z",
+    updated_at: "2020-02-03T01:12:37.601Z"
+  },
+  {
+    id: 9,
+    title: "Doctor Who",
+    image:
+      "https://upload.wikimedia.org/wikipedia/tr/thumb/0/0d/Doctor_Who_11._sezon.png/220px-Doctor_Who_11._sezon.png",
+    genre: "Drama",
+    description:
+      "Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.\n\nMorbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.\n\nFusce consequat. Nulla nisl. Nunc nisl.\n\nDuis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.",
+    platform: "YouTube TV|Philo|fuboTV|",
     approved: true,
     created_at: "2020-02-03T01:12:37.601Z",
     updated_at: "2020-02-03T01:12:37.601Z"

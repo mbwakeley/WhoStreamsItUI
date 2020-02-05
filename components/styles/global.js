@@ -6,8 +6,7 @@ export const globalStyles = StyleSheet.create({
     flex: 1
   },
   titleText: {
-    fontFamily: "nunito-bold",
-    fontSize: 18,
+    fontSize: 15,
     color: "#333"
   },
   paragraph: {

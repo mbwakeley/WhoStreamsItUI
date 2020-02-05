@@ -24,6 +24,7 @@ export const fetchAllShows = () => async dispatch => {
   });
   try {
     let response = await axios.get(BASE_URL);
+    console.log("data", response.data);
     dispatch({
       type: FETCH_ALL_SHOWS_SUCCESS,
       payload: response.data
