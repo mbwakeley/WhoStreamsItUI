@@ -26,5 +26,12 @@ export const globalStyles = StyleSheet.create({
     marginBottom: 10,
     marginTop: 6,
     textAlign: "center"
+  },
+  uploadButton: {
+    borderRadius: 8,
+    backgroundColor: "teal",
+    marginBottom: 20,
+    height: 20,
+    width: 20
   }
 });

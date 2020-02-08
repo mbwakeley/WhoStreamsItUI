@@ -1,9 +1,11 @@
-import React from "react";
-import { TextInput, View, Text } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, TextInput, View, Text, Button, Image } from "react-native";
 import { globalStyles } from "../styles/global.js";
 import { Formik } from "formik";
 import * as yup from "yup";
 import FlatButton from "../shared/FlatButton";
+import UploadButton from "../shared/UploadButton.js";
+import * as ImagePicker from "expo-image-picker";
 
 const showSchema = yup.object({
   title: yup
@@ -25,10 +27,30 @@ const showSchema = yup.object({
 });
 
 export default function NewShowForm({ addShow }) {
+  const [image, setImage] = useState(null);
+
+  selectImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1
+    });
+    if (!result.cancelled) {
+      setImage(result.uri);
+    }
+  };
+
   return (
     <View style={globalStyles.container}>
       <Formik
-        initialValues={{ title: "", genre: "", description: "", platform: "" }}
+        initialValues={{
+          title: "",
+          genre: "",
+          description: "",
+          platform: "",
+          image: "http://dummyimage.com/50x50.jpg/5fa2dd/ffffff"
+        }}
         validationSchema={showSchema}
         onSubmit={values => {
           addShow(values);
@@ -79,6 +101,19 @@ export default function NewShowForm({ addShow }) {
             <Text style={globalStyles.errorText}>
               {props.touched.platform && props.errors.platform}
             </Text>
+            <UploadButton text="Upload Photo" onPress={() => selectImage()} />
+            {image && (
+              <Image
+                source={{ uri: image }}
+                style={{
+                  alignSelf: "center",
+                  width: 200,
+                  height: 200,
+                  marginBottom: 10
+                }}
+                value={props.values.image}
+              />
+            )}
             <FlatButton text="submit" onPress={props.handleSubmit} />
           </View>
         )}
