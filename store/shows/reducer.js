@@ -1,14 +1,14 @@
 import {
   FETCH_ALL_SHOWS_PENDING,
-  ADD_SHOW_PENDING,
+  ADD_NEW_SHOW_PENDING,
   REMOVE_SHOW_PENDING,
   FETCH_ONE_SHOW_PENDING,
   FETCH_ALL_SHOWS_FAILED,
   FETCH_ONE_SHOW_FAILED,
-  ADD_SHOW_FAILED,
+  ADD_NEW_SHOW_FAILED,
   REMOVE_SHOW_FAILED,
   FETCH_ALL_SHOWS_SUCCESS,
-  ADD_SHOW_SUCCESS,
+  ADD_NEW_SHOW_SUCCESS,
   REMOVE_SHOW_SUCCESS,
   EDIT_SHOW_SUCCESS,
   EDIT_SHOW_PENDING,
@@ -26,7 +26,7 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case FETCH_ALL_SHOWS_PENDING:
-    case ADD_SHOW_PENDING:
+    case ADD_NEW_SHOW_PENDING:
     case REMOVE_SHOW_PENDING:
     case FETCH_ONE_SHOW_PENDING:
     case EDIT_SHOW_PENDING:
@@ -34,7 +34,7 @@ export default (state = initialState, action) => {
 
     case FETCH_ALL_SHOWS_FAILED:
     case FETCH_ONE_SHOW_FAILED:
-    case ADD_SHOW_FAILED:
+    case ADD_NEW_SHOW_FAILED:
     case REMOVE_SHOW_FAILED:
     case EDIT_SHOW_FAILED:
       return {
@@ -53,7 +53,7 @@ export default (state = initialState, action) => {
         ...state,
         one: action.payload
       };
-    case ADD_SHOW_SUCCESS:
+    case ADD_NEW_SHOW_SUCCESS:
       return {
         ...state,
         all: [action.payload, ...state.all]

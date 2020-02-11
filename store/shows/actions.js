@@ -7,9 +7,9 @@ import {
   FETCH_ONE_SHOW_FAILED,
   FETCH_ONE_SHOW_PENDING,
   FETCH_ONE_SHOW_SUCCESS,
-  ADD_SHOW_FAILED,
-  ADD_SHOW_PENDING,
-  ADD_SHOW_SUCCESS,
+  ADD_NEW_SHOW_FAILED,
+  ADD_NEW_SHOW_PENDING,
+  ADD_NEW_SHOW_SUCCESS,
   REMOVE_SHOW_PENDING,
   REMOVE_SHOW_SUCCESS,
   REMOVE_SHOW_FAILED,
@@ -24,7 +24,7 @@ export const fetchAllShows = () => async dispatch => {
   });
   try {
     let response = await axios.get(BASE_URL);
-    console.log("data", response.data);
+    // console.log("data", response.data);
     dispatch({
       type: FETCH_ALL_SHOWS_SUCCESS,
       payload: response.data
@@ -55,19 +55,19 @@ export const fetchOneShow = id => async dispatch => {
   }
 };
 
-export const addShow = newShow => async dispatch => {
+export const addNewShow = newShow => async dispatch => {
   dispatch({
-    type: ADD_SHOW_PENDING
+    type: ADD_NEW_SHOW_PENDING
   });
   try {
     let response = await axios.post(BASE_URL, newShow);
     dispatch({
-      type: ADD_SHOW_SUCCESS,
+      type: ADD_NEW_SHOW_SUCCESS,
       payload: response.data
     });
   } catch (err) {
     dispatch({
-      type: ADD_SHOW_FAILED,
+      type: ADD_NEW_SHOW_FAILED,
       payload: err
     });
   }

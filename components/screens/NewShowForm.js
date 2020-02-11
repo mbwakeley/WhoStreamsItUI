@@ -26,7 +26,7 @@ const showSchema = yup.object({
     .min(4)
 });
 
-export default function NewShowForm({ addShow }) {
+export default function NewShowForm({ addshow }) {
   const [image, setImage] = useState(null);
 
   selectImage = async () => {
@@ -53,7 +53,7 @@ export default function NewShowForm({ addShow }) {
         }}
         validationSchema={showSchema}
         onSubmit={values => {
-          addShow(values);
+          addshow(values);
         }}
       >
         {props => (

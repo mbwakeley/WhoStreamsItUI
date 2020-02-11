@@ -15,34 +15,52 @@ import Card from "../shared/card";
 import { MaterialIcons } from "@expo/vector-icons";
 import NewShowForm from "./NewShowForm";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllShows, removeShow } from "../../store/shows/actions";
+import {
+  fetchAllShows,
+  removeShow,
+  addNewShow
+} from "../../store/shows/actions";
 
 export default function Home({ navigation }) {
   const [modalOpen, setModalOpen] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchAllShows()), dispatch(removeShow());
+    dispatch(fetchAllShows()), dispatch(addNewShow());
   }, [dispatch]);
 
   const shows = useSelector(state => state.shows.all);
-  console.log("shows", shows);
+  // console.log("shows", shows);
+
+  //This is to add a show
 
   const addShow = show => {
-    console.log(show, "addshow");
-    show.id = Math.random().toString();
-    setShows(currentShow => {
-      return [show, ...currentShow];
-    });
-    setModalOpen(false);
+    console.log(show, "add show");
+    dispatch(addNewShow(show));
+  };
+
+  //This is how to add a show on the client side.
+  // const addshow = show => {
+  //   console.log(show, "addshow");
+  //   show.id = Math.random().toString();
+  //   setShows(currentShow => {
+  //     return [show, ...currentShow];
+  //   });
+  //   setModalOpen(false);
+  // };
+
+  //This is to delete show on the server side
+  const handleDelete = id => {
+    dispatch(removeShow(id));
   };
 
   //This is to delete a show
-  const handleDelete = id => {
-    removeShow(prevShows => {
-      return prevShows.filter(show => show.id != id);
-    });
-  };
+  //This is on client side only
+  // const handleDelete = id => {
+  //   removeShow(prevShows => {
+  //     return prevShows.filter(show => show.id != id);
+  //   });
+  // };
 
   // const [shows, setShows] = useState([
   //   {
