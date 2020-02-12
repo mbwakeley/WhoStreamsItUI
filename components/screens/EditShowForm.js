@@ -3,8 +3,6 @@ import { StyleSheet, TextInput, View, Text, Button, Image } from "react-native";
 import { globalStyles } from "../styles/global.js";
 import { Formik } from "formik";
 import * as yup from "yup";
-import FlatButton from "../shared/FlatButton";
-import UploadButton from "../shared/UploadButton.js";
 import * as ImagePicker from "expo-image-picker";
 
 const showSchema = yup.object({
@@ -26,7 +24,7 @@ const showSchema = yup.object({
     .min(4)
 });
 
-export default function NewShowForm({ addShow }) {
+export default function EditShowForm() {
   const [image, setImage] = useState(null);
 
   selectImage = async () => {
@@ -53,7 +51,7 @@ export default function NewShowForm({ addShow }) {
         }}
         validationSchema={showSchema}
         onSubmit={values => {
-          addShow(values);
+          editShow(values);
         }}
       >
         {props => (
@@ -114,7 +112,7 @@ export default function NewShowForm({ addShow }) {
                 value={props.values.image}
               />
             )}
-            <FlatButton text="submit" onPress={props.handleSubmit} />
+            <FlatButton text="Save" />
           </View>
         )}
       </Formik>

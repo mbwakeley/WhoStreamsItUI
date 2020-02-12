@@ -1,17 +1,45 @@
-import React from "react";
-import { StyleSheet, View, Text, Image, ScrollView } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  FlatList,
+  Modal,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Image,
+  ScrollView
+} from "react-native";
 import { globalStyles } from "../styles/global";
 import Card from "../shared/card";
+import { MaterialIcons } from "@expo/vector-icons";
 import DeleteButton from "../shared/DeleteButton";
 import EditButton from "../shared/EditButton";
+import EditShowForm from "./EditShowForm";
 
 export default function ShowDetails({ navigation }) {
+  const [modalOpen, setModalOpen] = useState(false);
   const item = navigation.getParam("item");
   const handleDelete = navigation.getParam("handleDelete");
-  console.log(handleDelete, "navigation");
+  const id = item.id;
+  console.log(id, handleDelete, "navigation");
 
   return (
     <View style={globalStyles.container}>
+      <Modal visible={modalOpen} animationType="slide">
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.modalContent}>
+            <MaterialIcons
+              name="close"
+              size={24}
+              style={{ ...styles.modalToggle, ...styles.modalClose }}
+              onPress={() => setModalOpen(false)} //This is to close the modal my setting the usestate to false
+            />
+            <EditShowForm />
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal>
       {/* {navigation.getParam("title")} is pretty much the same as prosp.reviews.title */}
       <ScrollView>
         <Card>
@@ -27,7 +55,7 @@ export default function ShowDetails({ navigation }) {
           <View />
           <Text style={globalStyles.titleText}>{item.platform}</Text>
           <View style={styles.buttonView}>
-            <EditButton text="Edit" />
+            <EditButton text="Edit" onPress={() => setModalOpen(true)} />
             <DeleteButton text="Delete" onPress={() => handleDelete(item.id)} />
           </View>
         </Card>
