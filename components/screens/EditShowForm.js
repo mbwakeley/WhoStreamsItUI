@@ -1,9 +1,19 @@
 import React, { useState } from "react";
-import { StyleSheet, TextInput, View, Text, Button, Image } from "react-native";
-import { globalStyles } from "../styles/global.js";
+import {
+  StyleSheet,
+  TextInput,
+  View,
+  Text,
+  Button,
+  Image,
+  ScrollView
+} from "react-native";
+import { globalStyles } from "../styles/global";
 import { Formik } from "formik";
 import * as yup from "yup";
 import * as ImagePicker from "expo-image-picker";
+import UploadButton from "../shared/UploadButton.js";
+import FlatButton from "../shared/FlatButton";
 
 const showSchema = yup.object({
   title: yup
@@ -24,8 +34,10 @@ const showSchema = yup.object({
     .min(4)
 });
 
-export default function EditShowForm() {
+export default function EditShowForm({ editOneShow, item }) {
   const [image, setImage] = useState(null);
+
+  console.log(editOneShow, item, "editoneshow");
 
   selectImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -43,22 +55,22 @@ export default function EditShowForm() {
     <View style={globalStyles.container}>
       <Formik
         initialValues={{
-          title: "",
-          genre: "",
-          description: "",
-          platform: "",
-          image: "http://dummyimage.com/50x50.jpg/5fa2dd/ffffff"
+          title: item.title,
+          genre: item.genre,
+          description: item.description,
+          platform: item.platform,
+          image: item.image
         }}
         validationSchema={showSchema}
         onSubmit={values => {
-          editShow(values);
+          editOneShow(values);
         }}
       >
         {props => (
           <View>
             <TextInput
               style={globalStyles.input}
-              placeholder="Show Title"
+              placeholder={item.title}
               onChangeText={props.handleChange("title")}
               value={props.values.title}
             />
@@ -68,7 +80,7 @@ export default function EditShowForm() {
             </Text>
             <TextInput
               style={globalStyles.input}
-              placeholder="Show Genre"
+              placeholder={item.genre}
               onChangeText={props.handleChange("genre")}
               value={props.values.genre}
             />
@@ -81,7 +93,7 @@ export default function EditShowForm() {
               style={globalStyles.input}
               multiline
               minHeight={80}
-              placeholder="Show Description"
+              placeholder={item.description}
               onChangeText={props.handleChange("description")}
               value={props.values.description}
             />
@@ -91,7 +103,7 @@ export default function EditShowForm() {
             </Text>
             <TextInput
               style={globalStyles.input}
-              placeholder="Streaming platform"
+              placeholder={item.platform}
               onChangeText={props.handleChange("platform")}
               value={props.values.platform}
             />
@@ -109,10 +121,10 @@ export default function EditShowForm() {
                   height: 200,
                   marginBottom: 10
                 }}
-                value={props.values.image}
+                value={"http://dummyimage.com/50x50.jpg/5fa2dd/ffffff"}
               />
             )}
-            <FlatButton text="Save" />
+            <FlatButton text="Save" onPress={props.handleSubmit} />
           </View>
         )}
       </Formik>

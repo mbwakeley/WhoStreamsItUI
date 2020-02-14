@@ -6,6 +6,7 @@ import * as yup from "yup";
 import FlatButton from "../shared/FlatButton";
 import UploadButton from "../shared/UploadButton.js";
 import * as ImagePicker from "expo-image-picker";
+import { addNewShow } from "../../store/shows/actions.js";
 
 const showSchema = yup.object({
   title: yup
@@ -28,6 +29,7 @@ const showSchema = yup.object({
 
 export default function NewShowForm({ addShow }) {
   const [image, setImage] = useState(null);
+  console.log(addShow, "Addshowshow");
 
   selectImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({

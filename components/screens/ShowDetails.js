@@ -23,7 +23,8 @@ export default function ShowDetails({ navigation }) {
   const item = navigation.getParam("item");
   const handleDelete = navigation.getParam("handleDelete");
   const id = item.id;
-  console.log(id, handleDelete, "navigation");
+  const editOneShow = navigation.getParam("editOneShow");
+  // console.log(id, handleDelete, editOneShow, "navigation");
 
   return (
     <View style={globalStyles.container}>
@@ -36,7 +37,7 @@ export default function ShowDetails({ navigation }) {
               style={{ ...styles.modalToggle, ...styles.modalClose }}
               onPress={() => setModalOpen(false)} //This is to close the modal my setting the usestate to false
             />
-            <EditShowForm />
+            <EditShowForm editOneShow={editOneShow} item={item} />
           </View>
         </TouchableWithoutFeedback>
       </Modal>
@@ -86,5 +87,16 @@ const styles = StyleSheet.create({
     marginTop: 10,
     flexDirection: "row",
     justifyContent: "space-around"
+  },
+  modalContent: {
+    flex: 1
+  },
+  modalToggle: {
+    marginBottom: 10,
+    borderRightWidth: 1,
+    borderColor: "#f2f2f2",
+    padding: 10,
+    borderRadius: 10,
+    alignSelf: "center"
   }
 });
