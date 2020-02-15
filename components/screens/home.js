@@ -67,7 +67,6 @@ export default function Home({ navigation }) {
     setShows(prevShows => {
       return prevShows.filter(show => show.id != id);
     });
-    // navigation.goBack();
   };
 
   const [shows, setShows] = useState([

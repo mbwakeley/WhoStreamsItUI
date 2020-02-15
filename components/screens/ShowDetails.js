@@ -17,6 +17,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import DeleteButton from "../shared/DeleteButton";
 import EditButton from "../shared/EditButton";
 import EditShowForm from "./EditShowForm";
+import FlatButton from "../shared/FlatButton";
 
 export default function ShowDetails({ navigation }) {
   const [modalOpen, setModalOpen] = useState(false);
@@ -24,7 +25,12 @@ export default function ShowDetails({ navigation }) {
   const handleDelete = navigation.getParam("handleDelete");
   const id = item.id;
   const editOneShow = navigation.getParam("editOneShow");
-  // console.log(id, handleDelete, editOneShow, "navigation");
+  console.log(id, handleDelete, editOneShow, "navigation");
+
+  const handleBoth = () => {
+    handleDelete(item.id);
+    navigation.pop();
+  };
 
   return (
     <View style={globalStyles.container}>
@@ -57,12 +63,16 @@ export default function ShowDetails({ navigation }) {
           <Text style={globalStyles.titleText}>{item.platform}</Text>
           <View style={styles.buttonView}>
             <EditButton text="Edit" onPress={() => setModalOpen(true)} />
-            <DeleteButton text="Delete" onPress={() => handleDelete(item.id)} />
+            <DeleteButton text="Delete" onPress={() => handleBoth()} />
           </View>
         </Card>
       </ScrollView>
     </View>
   );
+}
+
+{
+  /* <DeleteButton text="Delete" onPress={() => handleBoth()} /> */
 }
 
 const styles = StyleSheet.create({
