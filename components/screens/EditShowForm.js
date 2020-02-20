@@ -36,8 +36,8 @@ const showSchema = yup.object({
 
 export default function EditShowForm({ editOneShow, item }) {
   const [image, setImage] = useState(null);
-
-  console.log(editOneShow, item, "editoneshow");
+  const id = item.id;
+  // console.log(editOneShow, item.id, "editoneshow");
 
   selectImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -63,7 +63,8 @@ export default function EditShowForm({ editOneShow, item }) {
         }}
         validationSchema={showSchema}
         onSubmit={values => {
-          editOneShow(values);
+          editOneShow(values, id);
+          console.log("values", values);
         }}
       >
         {props => (

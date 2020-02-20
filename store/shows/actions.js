@@ -91,8 +91,8 @@ export const removeShow = id => async dispatch => {
   }
 };
 
-export const editShow = (id, updatedShow) => async dispatch => {
-  console.log("editShowId", id);
+export const editShow = (updatedShow, id) => async dispatch => {
+  console.log("editShowId", id, updatedShow);
   dispatch({
     type: EDIT_SHOW_PENDING
   });
