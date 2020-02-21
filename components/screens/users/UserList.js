@@ -16,10 +16,23 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "../../shared/card";
 import { SearchBar } from "react-native-elements";
+import { fetchAllUsers } from "../../../store/users/actions";
 
 export default function UserList({ navigation }) {
   const [search, setSearch] = useState("");
+  // const dispatch = useDispatch();
 
+  // useEffect(() => {
+  //   dispatchEvent(fetchAllUsers());
+  // }, [dispatch]);
+  //hooks to pull all the users from the state
+  // const users = useSelector(state => state.users.all);
+
+  //hooks too pull logged in user from the state
+  const currentUser = useSelector(state => state.users.loggedInUser);
+  console.log(currentUser, "current user");
+
+  //This is for the search bar.
   const updateSearch = search => {
     setSearch(search);
   };
