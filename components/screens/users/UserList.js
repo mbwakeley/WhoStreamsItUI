@@ -233,27 +233,64 @@ export default function UserList({ navigation }) {
   return (
     <View style={globalStyles.container}>
       {/* The onpress to true is open the modal  */}
-      <SearchBar
-        onChangeText={updateSearch}
-        value={search}
-        placeholder="Search for users..."
-      />
-      <FlatList
-        style={{ marginTop: 20 }}
-        data={users}
-        keyExtractor={item => item.username}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() =>
-              navigation.navigate("UserDetails", { item, handleDelete })
-            }
-          >
-            <Card>
-              <Text style={globalStyles.titleText}>{item.username}</Text>
-            </Card>
-          </TouchableOpacity>
-        )}
-      />
+      {currentUser.rank === "admin" ? (
+        <View>
+          <SearchBar
+            onChangeText={updateSearch}
+            value={search}
+            placeholder="Search for users..."
+          />
+          <FlatList
+            style={{ marginTop: 20 }}
+            data={users}
+            keyExtractor={item => item.username}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("UserDetails", { item, handleDelete })
+                }
+              >
+                <Card>
+                  <Text style={globalStyles.titleText}>{item.username}</Text>
+                </Card>
+              </TouchableOpacity>
+            )}
+          />
+        </View>
+      ) : (
+        <View>
+          <Card>
+            <Text style={styles.email}>Username: {currentUser.username}</Text>
+            <Text style={styles.email}>Email: {currentUser.email}</Text>
+            {/* <View style={styles.border} /> */}
+          </Card>
+        </View>
+      )}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  username: {
+    fontSize: 30,
+    color: "#333"
+  },
+  email: {
+    fontSize: 15,
+    color: "#333"
+  },
+  image: {
+    height: 315,
+    width: 315,
+    margin: 5
+  },
+  border: {
+    borderBottomColor: "black",
+    borderBottomWidth: 1
+  },
+  buttonView: {
+    marginTop: 10,
+    flexDirection: "row",
+    justifyContent: "space-around"
+  }
+});
