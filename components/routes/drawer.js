@@ -3,7 +3,6 @@ import { createAppContainer } from "react-navigation";
 import HomeStack from "./homeStack";
 import MovieStack from "./MovieStack";
 import UserStack from "./UserStack";
-
 const RootDrawerNavigator = createDrawerNavigator({
   Home: {
     screen: HomeStack

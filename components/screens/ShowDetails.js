@@ -18,6 +18,7 @@ import DeleteButton from "../shared/DeleteButton";
 import EditButton from "../shared/EditButton";
 import EditShowForm from "./EditShowForm";
 import FlatButton from "../shared/FlatButton";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function ShowDetails({ navigation }) {
   const [modalOpen, setModalOpen] = useState(false);
@@ -26,6 +27,7 @@ export default function ShowDetails({ navigation }) {
   const id = item.id;
   const editOneShow = navigation.getParam("editOneShow");
   console.log(id, handleDelete, editOneShow, "navigation");
+  const currentUser = useSelector(state => state.users.loggedInUser);
 
   const handleBoth = () => {
     handleDelete(item.id);
@@ -61,10 +63,16 @@ export default function ShowDetails({ navigation }) {
           <Text style={globalStyles.titleText}>{item.description}</Text>
           <View />
           <Text style={globalStyles.titleText}>{item.platform}</Text>
-          <View style={styles.buttonView}>
-            <EditButton text="Edit" onPress={() => setModalOpen(true)} />
-            <DeleteButton text="Delete" onPress={() => handleBoth()} />
-          </View>
+          {currentUser.rank === "admin" ? (
+            <View style={styles.buttonView}>
+              <EditButton text="Edit" onPress={() => setModalOpen(true)} />
+              <DeleteButton text="Delete" onPress={() => handleBoth()} />
+            </View>
+          ) : (
+            <View style={styles.buttonView}>
+              <FlatButton text="Submit Update Request" />
+            </View>
+          )}
         </Card>
       </ScrollView>
     </View>

@@ -30,12 +30,7 @@ export default function UserList({ navigation }) {
 
   //hooks too pull logged in user from the state
   const currentUser = useSelector(state => state.users.loggedInUser);
-  console.log(currentUser, "current user");
-
-  //This is for the search bar.
-  const updateSearch = search => {
-    setSearch(search);
-  };
+  // console.log(currentUser, "current user");
 
   //Deleting a user on the client side.
   const handleDelete = id => {
@@ -227,9 +222,16 @@ export default function UserList({ navigation }) {
     }
   ]);
 
-  //   const filteredUsers = users.filter(user =>
-  //     user.username.toLowerCase().includes(setSearch)
-  //   );
+  //This is for the search bar.
+  const updateSearch = search => {
+    setSearch(search);
+    console.log(search, "search");
+  };
+
+  const filteredUsers = users.filter(user =>
+    user.username.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <View style={globalStyles.container}>
       {/* The onpress to true is open the modal  */}
@@ -242,7 +244,7 @@ export default function UserList({ navigation }) {
           />
           <FlatList
             style={{ marginTop: 20 }}
-            data={users}
+            data={filteredUsers}
             keyExtractor={item => item.username}
             renderItem={({ item }) => (
               <TouchableOpacity
