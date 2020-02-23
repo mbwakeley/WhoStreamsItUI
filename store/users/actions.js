@@ -12,7 +12,10 @@ import {
   ADD_NEW_USER_SUCCESS,
   REMOVE_USER_PENDING,
   REMOVE_USER_SUCCESS,
-  REMOVE_USER_FAILED
+  REMOVE_USER_FAILED,
+  EDIT_USER_PENDING,
+  EDIT_USER_SUCCESS,
+  EDIT_USER_FAILED
 } from "./constants";
 
 export const fetchAllUsers = () => async dispatch => {
@@ -83,6 +86,25 @@ export const removeUser = id => async dispatch => {
   } catch (err) {
     dispatch({
       type: REMOVE_USER_FAILED,
+      payload: err
+    });
+  }
+};
+
+export const editUser = (updatedUser, id) => async dispatch => {
+  console.log("editUserId", id, updatedUser);
+  dispatch({
+    type: EDIT_USER_PENDING
+  });
+  try {
+    let response = await axios.patch(BASE_URL + `/${id}`, updatedUser);
+    dispatch({
+      type: EDIT_USER_SUCCESS,
+      payload: response.data
+    });
+  } catch (err) {
+    dispatch({
+      type: EDIT_USER_FAILED,
       payload: err
     });
   }
