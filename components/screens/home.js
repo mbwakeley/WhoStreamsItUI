@@ -58,10 +58,10 @@ export default function Home({ navigation }) {
   // };
 
   //This is to edit a show on server side
-  const editOneShow = (updatedShow, id) => {
-    console.log(updatedShow, "updatedshow home conponent");
-    dispatch(editShow(updatedShow, id));
-  };
+  // const editOneShow = (updatedShow, id) => {
+  //   console.log(updatedShow, "updatedshow home conponent");
+  //   dispatch(editShow(updatedShow, id));
+  // };
 
   //This is to delete show on the server side
   const handleDelete = id => {
@@ -468,7 +468,6 @@ export default function Home({ navigation }) {
             onPress={() =>
               navigation.navigate("ShowDetails", {
                 item,
-                editOneShow,
                 handleDelete
               })
             }

@@ -19,19 +19,28 @@ import EditButton from "../shared/EditButton";
 import EditShowForm from "./EditShowForm";
 import FlatButton from "../shared/FlatButton";
 import { useDispatch, useSelector } from "react-redux";
+import { editShow } from "../../store/shows/actions";
 
 export default function ShowDetails({ navigation }) {
   const [modalOpen, setModalOpen] = useState(false);
   const item = navigation.getParam("item");
   const handleDelete = navigation.getParam("handleDelete");
+  const dispatch = useDispatch();
   const id = item.id;
-  const editOneShow = navigation.getParam("editOneShow");
+  // const editOneShow = navigation.getParam("editOneShow");
   console.log(id, handleDelete, editOneShow, "navigation");
   const currentUser = useSelector(state => state.users.loggedInUser);
 
   const handleBoth = () => {
     handleDelete(item.id);
     navigation.pop();
+  };
+
+  const editOneShow = (updatedShow, id) => {
+    console.log(updatedShow, "updatedshow showdetails conponent");
+    dispatch(editShow(updatedShow, id));
+    setModalOpen(false);
+    // refreshScreen();
   };
 
   return (

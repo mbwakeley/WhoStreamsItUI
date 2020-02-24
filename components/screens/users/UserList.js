@@ -16,14 +16,14 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "../../shared/card";
 import { SearchBar } from "react-native-elements";
-import { fetchAllUsers } from "../../../store/users/actions";
+import { fetchAllUsers, editUser } from "../../../store/users/actions";
 
 export default function UserList({ navigation }) {
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatchEvent(fetchAllUsers());
+    dispatch(fetchAllUsers());
   }, [dispatch]);
 
   //hooks to pull all the users from the state
