@@ -16,7 +16,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "../../shared/card";
 import { SearchBar } from "react-native-elements";
-import { fetchAllUsers, editUser } from "../../../store/users/actions";
+import { fetchAllUsers, removeUser } from "../../../store/users/actions";
 
 export default function UserList({ navigation }) {
   const [search, setSearch] = useState("");
@@ -34,10 +34,15 @@ export default function UserList({ navigation }) {
   // console.log(currentUser, "current user");
 
   //Deleting a user on the client side.
+  // const handleDelete = id => {
+  //   setUsers(prevShows => {
+  //     return prevShows.filter(user => user.id != id);
+  //   });
+  // };
+
+  //Deleting user on server side.
   const handleDelete = id => {
-    setUsers(prevShows => {
-      return prevShows.filter(user => user.id != id);
-    });
+    dispatch(removeUser(id));
   };
 
   // const [users, setUsers] = useState([
