@@ -13,13 +13,13 @@ const screens = {
         )
       };
     }
+  },
+  ShowUpdateDetails: {
+    screen: ShowUpdateDetails,
+    navigationOptions: {
+      title: "Show Update Details"
+    }
   }
-  // ShowUpdateDetails: {
-  //   screen: ShowUpdateDetails,
-  //   navigationOptions: {
-  //     title: "Show Update Details"
-  //   }
-  // }
 };
 
 const UserStack = createStackNavigator(screens, {

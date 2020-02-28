@@ -14,7 +14,7 @@ import Card from "../../shared/card";
 import { MaterialIcons } from "@expo/vector-icons";
 import DeleteButton from "../../shared/DeleteButton";
 import EditButton from "../../shared/EditButton";
-import editUser from "../../../store/users/actions";
+import { editUser } from "../../../store/users/actions";
 import { useDispatch } from "react-redux";
 import EditUserForm from "./EditUserForm";
 
@@ -28,7 +28,7 @@ export default function UserDetails({ navigation }) {
   console.log(id, "id");
 
   const handleBoth = () => {
-    handleDelete(item.id);
+    handleDelete(id);
     navigation.pop();
   };
   const editOneUser = (updatedUser, id) => {

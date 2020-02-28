@@ -19,7 +19,7 @@ import { fetchAllUsers } from "../../../store/users/actions";
 import { fetchAllShowUpdates } from "../../../store/showupdates/actions";
 import { fetchAllShows } from "../../../store/shows/actions";
 
-export default function ShowUpdateList() {
+export default function ShowUpdateList({ navigation }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,10 +29,25 @@ export default function ShowUpdateList() {
 
   const shows = useSelector(state => state.shows.all);
   const showUpdates = useSelector(state => state.showUpdates.all);
-  const showUpdatesName = showUpdates.filter(
-    showUpdate => showUpdate.show_id === shows.id
-  );
-  console.log(showUpdatesName, " Show update names");
+  let showUpdatesName = [];
+
+  shows.forEach(show => {
+    for (let i = 0; i < showUpdates.length; i++) {
+      if (show.id === showUpdates[i].show_id) {
+        showUpdatesName.push(show);
+      }
+    }
+  });
+
+  // showUpdates.forEach(showUpdate => {
+  //   for (let i = 0; i < shows.length; i++) {
+  //     if (showUpdate.show_id === shows[i].id) {
+  //       showUpdatesName.push(showUpdate);
+  //     }
+  //   }
+  // });
+
+  console.log("Hello", showUpdatesName, " Show update names");
 
   return (
     <View style={globalStyles.container}>
@@ -44,12 +59,10 @@ export default function ShowUpdateList() {
           keyExtractor={item => item.title}
           renderItem={({ item }) => (
             <TouchableOpacity
-              onPress={() => navigation.navigate("UserDetails", { item })}
+              onPress={() => navigation.navigate("ShowUpdateDetails", { item })}
             >
               <Card>
-                <Text style={globalStyles.titleText}>
-                  {showUpdatesName.title}
-                </Text>
+                <Text style={globalStyles.titleText}>{item.title}</Text>
               </Card>
             </TouchableOpacity>
           )}

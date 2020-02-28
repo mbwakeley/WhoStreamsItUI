@@ -3,7 +3,6 @@ import { StyleSheet, TextInput, View, Text } from "react-native";
 import { globalStyles } from "../../styles/global";
 import { Formik } from "formik";
 import * as yup from "yup";
-import { useSelector } from "react-redux";
 import FlatButton from "../../shared/FlatButton";
 
 const userSchema = yup.object({
@@ -37,7 +36,6 @@ export default function EditUserForm({ editOneUser, item }) {
         }}
         validationSchema={userSchema}
         onSubmit={values => {
-          console.log("values", values);
           editOneUser(values, id);
         }}
       >
