@@ -18,4 +18,4 @@ export const EDIT_SHOW_SUCCESS = "EDIT_SHOW_SUCCESS";
 export const EDIT_SHOW_FAILED = "EDIT_SHOW_FAILED";
 export const EDIT_SHOW_PENDING = "EDIT_SHOW_PENDING";
 
-export const BASE_URL = "http://192.168.1.12:8000/shows";
+export const BASE_URL = "http://192.168.1.2:8000/shows";

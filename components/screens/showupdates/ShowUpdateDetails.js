@@ -13,21 +13,36 @@ export default function ShowUpdateDetails({ navigation }) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchAllUsers());
+    dispatch(fetchAllShows());
   }, [dispatch]);
 
   const users = useSelector(state => state.users.all);
+  const shows = useSelector(state => state.shows.all);
   const id = item.id;
   console.log("showupdate id", item);
-  const updateByUser = users.filter(user => user.id === item.user_id)[0];
-  console.log(updateByUser, "updatebyuser");
+  let updateByUser = {};
+  users.forEach(user => {
+    if (user.id === item.user_id) {
+      updateByUser = user;
+    }
+  });
+
+  let updateByShow = {};
+  shows.forEach(show => {
+    if (show.id === item.show_id) {
+      updateByShow = show;
+    }
+  });
+
+  // const updateByShow = shows.filter(show => show.id === item.user_id)[0];
 
   return (
     <View style={globalStyles.container}>
       {/* {navigation.getParam("title")} is pretty much the same as prosp.reviews.title */}
 
       <Card>
-        <Text style={styles.showTitle}>{item.show_id}</Text>
-        <Text style={styles.username}>{item.user_id}</Text>
+        <Text style={styles.showTitle}>{updateByShow.title}</Text>
+        <Text style={styles.username}>{updateByUser.username}</Text>
         {/* <View style={styles.border} /> */}
         <Text style={globalStyles.titleText}>{item.content}</Text>
         <View />
