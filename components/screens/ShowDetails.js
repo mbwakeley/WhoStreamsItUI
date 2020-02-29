@@ -25,6 +25,7 @@ import { addNewShowUpdate } from "../../store/showupdates/actions";
 
 export default function ShowDetails({ navigation }) {
   const [modalOpen, setModalOpen] = useState(false);
+  const [update, setUpdate] = useState(0);
   const item = navigation.getParam("item");
   const handleDelete = navigation.getParam("handleDelete");
   const dispatch = useDispatch();
@@ -42,7 +43,9 @@ export default function ShowDetails({ navigation }) {
     console.log(updatedShow, "updatedshow showdetails conponent");
     dispatch(editShow(updatedShow, id));
     setModalOpen(false);
+    setUpdate(update + 1);
   };
+
   useEffect(() => {
     console.log("item", item);
   });

@@ -15,6 +15,7 @@ import {
   EDIT_SHOW_FAILED,
   FETCH_ONE_SHOW_SUCCESS
 } from "./constants";
+import { EDIT_USER_SUCCESS } from "../users/constants";
 
 const initialState = {
   all: [],
@@ -56,19 +57,31 @@ export default (state = initialState, action) => {
     case ADD_NEW_SHOW_SUCCESS:
       return {
         ...state,
-        all: [action.payload, ...state.all]
+        all: [action.payload[0], ...state.all]
       };
 
     case REMOVE_SHOW_SUCCESS:
       return {
         ...state,
-        all: state.all.filter(show => show.id !== action.payload.id)
+        all: state.all.filter(show => show.id !== action.payload[0].id)
       };
 
-    case EDIT_SHOW_SUCCESS:
-      return state.map(show =>
-        show.id === action.payload.id ? action.payload : show
-      );
+    // case EDIT_SHOW_SUCCESS:
+    //   return state.map(show =>
+    //     show.id === action.payload.id ? action.payload : show
+    //   );
+    // case EDIT_SHOW_SUCCESS:
+    //   return {
+    //     ...state,
+    //     id: action.payload
+    case EDIT_USER_SUCCESS:
+      return {
+        ...state,
+        all: [
+          ...state.all.filter(show => show.id !== action.payload[0].id),
+          action.payload
+        ]
+      };
 
     default:
       return state;
