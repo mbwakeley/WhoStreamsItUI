@@ -9,6 +9,7 @@ import { fetchAllShows } from "../../../store/shows/actions";
 
 export default function ShowUpdateDetails({ navigation }) {
   const item = navigation.getParam("item");
+  const handleDelete = navigation.getParam("handleDelete");
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -20,6 +21,7 @@ export default function ShowUpdateDetails({ navigation }) {
   const shows = useSelector(state => state.shows.all);
   const id = item.id;
   console.log("showupdate id", item);
+
   let updateByUser = {};
   users.forEach(user => {
     if (user.id === item.user_id) {
@@ -35,6 +37,12 @@ export default function ShowUpdateDetails({ navigation }) {
   });
 
   // const updateByShow = shows.filter(show => show.id === item.user_id)[0];
+
+  //This will delete the show and allow user to go back to the previous.
+  const handleBoth = () => {
+    handleDelete(id);
+    navigation.pop();
+  };
 
   return (
     <View style={globalStyles.container}>

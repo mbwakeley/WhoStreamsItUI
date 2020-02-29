@@ -1,22 +1,12 @@
 import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  FlatList,
-  Modal,
-  TouchableWithoutFeedback,
-  Keyboard,
-  TextInput,
-  Image
-} from "react-native";
+import { View, Text, TouchableOpacity, FlatList } from "react-native";
 import { globalStyles } from "../../styles/global";
-import { MaterialIcons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "../../shared/card";
-import { fetchAllUsers } from "../../../store/users/actions";
-import { fetchAllShowUpdates } from "../../../store/showupdates/actions";
+import {
+  fetchAllShowUpdates,
+  removeShowUpdate
+} from "../../../store/showupdates/actions";
 import { fetchAllShows } from "../../../store/shows/actions";
 
 export default function ShowUpdateList({ navigation }) {
@@ -29,6 +19,11 @@ export default function ShowUpdateList({ navigation }) {
 
   // const shows = useSelector(state => state.shows.all);
   const showUpdates = useSelector(state => state.showUpdates.all);
+
+  const handleDelete = id => {
+    dispatch(removeShowUpdate(id));
+  };
+
   // let showUpdatesName = [];
 
   // shows.forEach(show => {
@@ -59,7 +54,9 @@ export default function ShowUpdateList({ navigation }) {
           keyExtractor={item => item.content}
           renderItem={({ item }) => (
             <TouchableOpacity
-              onPress={() => navigation.navigate("ShowUpdateDetails", { item })}
+              onPress={() =>
+                navigation.navigate("ShowUpdateDetails", { item, handleDelete })
+              }
             >
               <Card>
                 <Text style={globalStyles.titleText}>{item.content}</Text>

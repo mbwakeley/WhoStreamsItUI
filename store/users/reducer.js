@@ -21,10 +21,11 @@ const initialState = {
   one: {},
   err: {},
   loggedInUser: {
+    id: 1,
     username: "Darvidicus",
     email: "Darvidicus@overwatch.com",
     password: "Junkrat123",
-    rank: "admin"
+    rank: "user"
   }
 };
 

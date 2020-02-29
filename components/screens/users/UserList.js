@@ -4,15 +4,9 @@ import {
   View,
   Text,
   TouchableOpacity,
-  FlatList,
-  Modal,
-  TouchableWithoutFeedback,
-  Keyboard,
-  TextInput,
-  Image
+  FlatList
 } from "react-native";
 import { globalStyles } from "../../styles/global";
-import { MaterialIcons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "../../shared/card";
 import { SearchBar } from "react-native-elements";

@@ -20,6 +20,8 @@ import EditShowForm from "./EditShowForm";
 import FlatButton from "../shared/FlatButton";
 import { useDispatch, useSelector } from "react-redux";
 import { editShow } from "../../store/shows/actions";
+import NewShowUpdateForm from "../screens/showupdates/NewShowUpdateForm";
+import { addNewShowUpdate } from "../../store/showupdates/actions";
 
 export default function ShowDetails({ navigation }) {
   const [modalOpen, setModalOpen] = useState(false);
@@ -45,53 +47,90 @@ export default function ShowDetails({ navigation }) {
     console.log("item", item);
   });
 
-  return (
-    <View style={globalStyles.container}>
-      <Modal visible={modalOpen} animationType="slide">
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View style={styles.modalContent}>
-            <MaterialIcons
-              name="close"
-              size={24}
-              style={{ ...styles.modalToggle, ...styles.modalClose }}
-              onPress={() => setModalOpen(false)} //This is to close the modal my setting the usestate to false
+  const addShowUpdate = newShowUpdate => {
+    dispatch(addNewShowUpdate(newShowUpdate));
+    setModalOpen(false);
+  };
+
+  if (currentUser.rank === "admin") {
+    return (
+      <View style={globalStyles.container}>
+        <Modal visible={modalOpen} animationType="slide">
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={styles.modalContent}>
+              <MaterialIcons
+                name="close"
+                size={24}
+                style={{ ...styles.modalToggle, ...styles.modalClose }}
+                onPress={() => setModalOpen(false)} //This is to close the modal my setting the usestate to false
+              />
+              <EditShowForm editOneShow={editOneShow} item={item} />
+            </View>
+          </TouchableWithoutFeedback>
+        </Modal>
+        {/* {navigation.getParam("title")} is pretty much the same as prosp.reviews.title */}
+        <ScrollView>
+          <Card>
+            <Image
+              style={styles.image}
+              source={{ uri: item.image }}
+              resizeMode="contain"
             />
-            <EditShowForm editOneShow={editOneShow} item={item} />
-          </View>
-        </TouchableWithoutFeedback>
-      </Modal>
-      {/* {navigation.getParam("title")} is pretty much the same as prosp.reviews.title */}
-      <ScrollView>
-        <Card>
-          <Image
-            style={styles.image}
-            source={{ uri: item.image }}
-            resizeMode="contain"
-          />
-          <Text style={styles.showTitle}>{item.title}</Text>
-          <Text style={styles.showGenre}>{item.genre}</Text>
-          {/* <View style={styles.border} /> */}
-          <Text style={globalStyles.titleText}>{item.description}</Text>
-          <View />
-          <Text style={globalStyles.titleText}>{item.platform}</Text>
-          {currentUser.rank === "admin" ? (
+            <Text style={styles.showTitle}>{item.title}</Text>
+            <Text style={styles.showGenre}>{item.genre}</Text>
+            {/* <View style={styles.border} /> */}
+            <Text style={globalStyles.titleText}>{item.description}</Text>
+            <View />
+            <Text style={globalStyles.titleText}>{item.platform}</Text>
             <View style={styles.buttonView}>
               <EditButton text="Edit" onPress={() => setModalOpen(true)} />
               <DeleteButton text="Delete" onPress={() => handleBoth()} />
             </View>
-          ) : (
-            <View style={styles.buttonView}>
-              <FlatButton text="Submit Update Request" />
+          </Card>
+        </ScrollView>
+      </View>
+    );
+  } else {
+    return (
+      <View style={globalStyles.container}>
+        <Modal visible={modalOpen} animationType="slide">
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={styles.modalContent}>
+              <MaterialIcons
+                name="close"
+                size={24}
+                style={{ ...styles.modalToggle, ...styles.modalClose }}
+                onPress={() => setModalOpen(false)} //This is to close the modal my setting the usestate to false
+              />
+              <NewShowUpdateForm addShowUpdate={addShowUpdate} item={item} />
             </View>
-          )}
-        </Card>
-      </ScrollView>
-    </View>
-  );
-}
-
-{
-  /* <DeleteButton text="Delete" onPress={() => handleBoth()} /> */
+          </TouchableWithoutFeedback>
+        </Modal>
+        {/* {navigation.getParam("title")} is pretty much the same as prosp.reviews.title */}
+        <ScrollView>
+          <Card>
+            <Image
+              style={styles.image}
+              source={{ uri: item.image }}
+              resizeMode="contain"
+            />
+            <Text style={styles.showTitle}>{item.title}</Text>
+            <Text style={styles.showGenre}>{item.genre}</Text>
+            {/* <View style={styles.border} /> */}
+            <Text style={globalStyles.titleText}>{item.description}</Text>
+            <View />
+            <Text style={globalStyles.titleText}>{item.platform}</Text>
+            <View style={styles.buttonView}>
+              <FlatButton
+                text="Submit Update Request"
+                onPress={() => setModalOpen(true)}
+              />
+            </View>
+          </Card>
+        </ScrollView>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
