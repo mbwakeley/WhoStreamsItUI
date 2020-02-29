@@ -40,8 +40,10 @@ export default function ShowDetails({ navigation }) {
     console.log(updatedShow, "updatedshow showdetails conponent");
     dispatch(editShow(updatedShow, id));
     setModalOpen(false);
-    // refreshScreen();
   };
+  useEffect(() => {
+    console.log("item", item);
+  });
 
   return (
     <View style={globalStyles.container}>

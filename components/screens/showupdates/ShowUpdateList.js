@@ -27,17 +27,17 @@ export default function ShowUpdateList({ navigation }) {
     dispatch(fetchAllShowUpdates());
   }, [dispatch]);
 
-  const shows = useSelector(state => state.shows.all);
+  // const shows = useSelector(state => state.shows.all);
   const showUpdates = useSelector(state => state.showUpdates.all);
-  let showUpdatesName = [];
+  // let showUpdatesName = [];
 
-  shows.forEach(show => {
-    for (let i = 0; i < showUpdates.length; i++) {
-      if (show.id === showUpdates[i].show_id) {
-        showUpdatesName.push(show);
-      }
-    }
-  });
+  // shows.forEach(show => {
+  //   for (let i = 0; i < showUpdates.length; i++) {
+  //     if (show.id === showUpdates[i].show_id) {
+  //       showUpdatesName.push(show);
+  //     }
+  //   }
+  // });
 
   // showUpdates.forEach(showUpdate => {
   //   for (let i = 0; i < shows.length; i++) {
@@ -47,7 +47,7 @@ export default function ShowUpdateList({ navigation }) {
   //   }
   // });
 
-  console.log("Hello", showUpdatesName, " Show update names");
+  // console.log("Hello", showUpdatesName[4], " Show update names");
 
   return (
     <View style={globalStyles.container}>
@@ -55,14 +55,14 @@ export default function ShowUpdateList({ navigation }) {
       <View>
         <FlatList
           style={{ marginTop: 20 }}
-          data={showUpdatesName}
-          keyExtractor={item => item.title}
+          data={showUpdates}
+          keyExtractor={item => item.content}
           renderItem={({ item }) => (
             <TouchableOpacity
               onPress={() => navigation.navigate("ShowUpdateDetails", { item })}
             >
               <Card>
-                <Text style={globalStyles.titleText}>{item.title}</Text>
+                <Text style={globalStyles.titleText}>{item.content}</Text>
               </Card>
             </TouchableOpacity>
           )}

@@ -66,12 +66,17 @@ export default (state = initialState, action) => {
       };
 
     case EDIT_SHOW_SUCCESS:
-      return {
-        ...state,
-        id: action.payload
-      };
+      return state.map(show =>
+        show.id === action.payload.id ? action.payload : show
+      );
 
     default:
       return state;
   }
 };
+
+// case EDIT_SHOW_SUCCESS:
+//       return {
+//         ...state,
+//         id: action.payload
+//       };
