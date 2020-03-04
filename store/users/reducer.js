@@ -74,7 +74,7 @@ export default (state = initialState, action) => {
     case EDIT_USER_SUCCESS:
       return {
         ...state,
-        id: action.payload[0]
+        all: [action.payload[0], ...state.all]
       };
 
     default:

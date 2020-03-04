@@ -29,7 +29,6 @@ export default function ShowDetails({ navigation }) {
   const handleDelete = navigation.getParam("handleDelete");
   const dispatch = useDispatch();
   const id = item.id;
-  // const editOneShow = navigation.getParam("editOneShow");
   console.log(id, handleDelete, editOneShow, "navigation");
   const currentUser = useSelector(state => state.users.loggedInUser);
 
@@ -44,10 +43,7 @@ export default function ShowDetails({ navigation }) {
     setModalOpen(false);
     navigation.pop();
   };
-
-  useEffect(() => {
-    console.log("item", item.id);
-  });
+  console.log("item", item.id);
 
   const addShowUpdate = newShowUpdate => {
     dispatch(addNewShowUpdate(newShowUpdate));

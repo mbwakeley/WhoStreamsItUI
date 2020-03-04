@@ -29,7 +29,6 @@ export default function Home({ navigation }) {
     dispatch(fetchAllShows());
   }, [dispatch]);
 
-  const [update, setUpdate] = useState(0);
   const shows = useSelector(state => state.shows.all);
   // console.log("shows", shows);
 
@@ -67,7 +66,6 @@ export default function Home({ navigation }) {
   //This is to delete show on the server side
   const handleDelete = id => {
     dispatch(removeShow(id));
-    setUpdate(update + 1);
   };
 
   //This is to delete a show

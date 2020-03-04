@@ -56,7 +56,7 @@ export default (state = initialState, action) => {
     case ADD_NEW_SHOW_SUCCESS:
       return {
         ...state,
-        all: [action.payload, ...state.all]
+        all: [action.payload[0], ...state.all]
       };
 
     case REMOVE_SHOW_SUCCESS:
@@ -65,37 +65,11 @@ export default (state = initialState, action) => {
         all: state.all.filter(show => show.id !== action.payload[0].id)
       };
 
-    // case EDIT_SHOW_SUCCESS:
-    //   return state.map(show =>
-    //     show.id === action.payload[0].id ? action.payload : show
-    //   );
-
     case EDIT_SHOW_SUCCESS:
       return {
         ...state,
         all: [action.payload[0], ...state.all]
       };
-
-    // case EDIT_SHOW_SUCCESS:
-    //   return {
-    //     ...state,
-    //     all: [
-    //       ...state.all.filter(show => show.id !== action.payload[0].id),
-    //       action.payload[0]
-    //     ]
-    //   };
-
-    // case EDIT_SHOW_SUCCESS:
-    //   return {
-    //     ...state,
-    //     all: state.all.map(show => {
-    //       if (show.id === action.payload.id) {
-    //         return action.payload;
-    //       } else {
-    //         return shows;
-    //       }
-    //     })
-    //   };
 
     default:
       return state;
@@ -107,3 +81,27 @@ export default (state = initialState, action) => {
 //         ...state,
 //         id: action.payload
 //       };
+// case EDIT_SHOW_SUCCESS:
+//   return {
+//     ...state,
+//     all: [
+//       ...state.all.filter(show => show.id !== action.payload[0].id),
+//       action.payload[0]
+//     ]
+//   };
+
+// case EDIT_SHOW_SUCCESS:
+//   return {
+//     ...state,
+//     all: state.all.map(show => {
+//       if (show.id === action.payload.id) {
+//         return action.payload;
+//       } else {
+//         return shows;
+//       }
+//     })
+
+// case EDIT_SHOW_SUCCESS:
+//   return state.map(show =>
+//     show.id === action.payload[0].id ? action.payload : show
+//   );
