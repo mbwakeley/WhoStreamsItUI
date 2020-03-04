@@ -56,6 +56,7 @@ export const fetchOneShow = id => async dispatch => {
 };
 
 export const addNewShow = newShow => async dispatch => {
+  console.log("addNewShow actions", newShow);
   dispatch({
     type: ADD_NEW_SHOW_PENDING
   });

@@ -38,7 +38,6 @@ export default function Home({ navigation }) {
     // console.log(show, "add show");
     dispatch(addNewShow(show));
     setModalOpen(false);
-    setUpdate(update + 1);
   };
 
   //This is how to add a show on the client side.

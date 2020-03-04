@@ -68,13 +68,13 @@ export default (state = initialState, action) => {
     case REMOVE_USER_SUCCESS:
       return {
         ...state,
-        all: state.all.filter(user => user.id !== action.payload.id)
+        all: state.all.filter(user => user.id !== action.payload[0].id)
       };
 
     case EDIT_USER_SUCCESS:
       return {
         ...state,
-        id: action.payload
+        id: action.payload[0]
       };
 
     default:
