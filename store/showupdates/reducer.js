@@ -50,13 +50,15 @@ export default (state = initialState, action) => {
     case ADD_NEW_SHOWUPDATE_SUCCESS:
       return {
         ...state,
-        all: [action.payload, ...state.all]
+        all: [action.payload[0], ...state.all]
       };
 
     case REMOVE_SHOWUPDATE_SUCCESS:
       return {
         ...state,
-        all: state.all.filter(showUpdate => showUpdate.id !== action.payload.id)
+        all: state.all.filter(
+          showUpdate => showUpdate.id !== action.payload[0].id
+        )
       };
 
     default:

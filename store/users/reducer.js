@@ -62,7 +62,7 @@ export default (state = initialState, action) => {
     case ADD_NEW_USER_SUCCESS:
       return {
         ...state,
-        all: [action.payload, ...state.all]
+        all: [action.payload[0], ...state.all]
       };
 
     case REMOVE_USER_SUCCESS:
