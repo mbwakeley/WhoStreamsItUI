@@ -243,6 +243,8 @@ export default function UserList({ navigation }) {
         {currentUser.rank === "admin" ? (
           <View>
             <SearchBar
+              lightTheme
+              icon={{ type: "font-awesome", name: "search" }}
               onChangeText={updateSearch}
               value={search}
               placeholder="Search for users..."
@@ -259,7 +261,7 @@ export default function UserList({ navigation }) {
                   }
                 >
                   <Card>
-                    <Text style={globalStyles.titleText}>{item.username}</Text>
+                    <Text style={styles.username}>{item.username}</Text>
                   </Card>
                 </TouchableOpacity>
               )}
@@ -268,7 +270,9 @@ export default function UserList({ navigation }) {
         ) : (
           <View>
             <Card>
-              <Text style={styles.email}>Username: {currentUser.username}</Text>
+              <Text style={styles.username}>
+                Username: {currentUser.username}
+              </Text>
               <Text style={styles.email}>Email: {currentUser.email}</Text>
               {/* <View style={styles.border} /> */}
             </Card>
