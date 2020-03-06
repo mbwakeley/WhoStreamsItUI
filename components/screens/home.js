@@ -25,6 +25,7 @@ import {
 export default function Home({ navigation }) {
   const [modalOpen, setModalOpen] = useState(false);
   const dispatch = useDispatch();
+  const currentUser = useSelector(state => state.users.loggedInUser);
 
   useEffect(() => {
     dispatch(fetchAllShows());
@@ -438,56 +439,89 @@ export default function Home({ navigation }) {
   //   }
   // ]);
 
-  return (
-    <ImageBackground
-      source={require("../assets/greyBackground.jpg")}
-      style={styles.background}
-    >
-      <View style={globalStyles.container}>
-        <Modal visible={modalOpen} animationType="slide">
-          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View style={styles.modalContent}>
-              <MaterialIcons
-                name="close"
-                size={24}
-                style={{ ...styles.modalToggle, ...styles.modalClose }}
-                onPress={() => setModalOpen(false)} //This is to close the modal my setting the usestate to false
-              />
-              <NewShowForm addShow={addShow} />
-            </View>
-          </TouchableWithoutFeedback>
-        </Modal>
-        {/* The onpress to true is open the modal  */}
-        <MaterialIcons
-          name="add"
-          size={24}
-          style={styles.modalToggle}
-          onPress={() => setModalOpen(true)}
-        />
-        <FlatList
-          data={shows}
-          numColumns={3}
-          keyExtractor={item => item.image}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              onPress={() =>
-                navigation.navigate("ShowDetails", {
-                  item,
-                  handleDelete
-                })
-              }
-            >
-              <Image
-                style={styles.image}
-                source={{ uri: item.image }}
-                resizeMode="contain"
-              />
-            </TouchableOpacity>
-          )}
-        />
-      </View>
-    </ImageBackground>
-  );
+  if (currentUser.rank === "admin") {
+    return (
+      <ImageBackground
+        source={require("../assets/greyBackground.jpg")}
+        style={styles.background}
+      >
+        <View style={globalStyles.container}>
+          <Modal visible={modalOpen} animationType="slide">
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+              <View style={styles.modalContent}>
+                <MaterialIcons
+                  name="close"
+                  size={24}
+                  style={{ ...styles.modalToggle, ...styles.modalClose }}
+                  onPress={() => setModalOpen(false)} //This is to close the modal my setting the usestate to false
+                />
+                <NewShowForm addShow={addShow} />
+              </View>
+            </TouchableWithoutFeedback>
+          </Modal>
+          {/* The onpress to true is open the modal  */}
+          <MaterialIcons
+            name="add"
+            size={24}
+            style={styles.modalToggle}
+            onPress={() => setModalOpen(true)}
+          />
+          <FlatList
+            data={shows}
+            numColumns={3}
+            keyExtractor={item => item.image}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("ShowDetails", {
+                    item,
+                    handleDelete
+                  })
+                }
+              >
+                <Image
+                  style={styles.image}
+                  source={{ uri: item.image }}
+                  resizeMode="contain"
+                />
+              </TouchableOpacity>
+            )}
+          />
+        </View>
+      </ImageBackground>
+    );
+  } else {
+    return (
+      <ImageBackground
+        source={require("../assets/greyBackground.jpg")}
+        style={styles.background}
+      >
+        <View style={globalStyles.container}>
+          <FlatList
+            data={shows}
+            numColumns={3}
+            keyExtractor={item => item.image}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("ShowDetails", {
+                    item,
+                    handleDelete
+                  })
+                }
+              >
+                <Image
+                  style={styles.image}
+                  source={{ uri: item.image }}
+                  resizeMode="contain"
+                />
+              </TouchableOpacity>
+            )}
+          />
+        </View>
+      </ImageBackground>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
