@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
+  ImageBackground,
   View,
   Text,
   TouchableOpacity,
@@ -233,42 +234,48 @@ export default function UserList({ navigation }) {
   );
 
   return (
-    <View style={globalStyles.container}>
-      {/* The onpress to true is open the modal  */}
-      {currentUser.rank === "admin" ? (
-        <View>
-          <SearchBar
-            onChangeText={updateSearch}
-            value={search}
-            placeholder="Search for users..."
-          />
-          <FlatList
-            style={{ marginTop: 20 }}
-            data={filteredUsers}
-            keyExtractor={item => item.username}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate("UserDetails", { item, handleDelete })
-                }
-              >
-                <Card>
-                  <Text style={globalStyles.titleText}>{item.username}</Text>
-                </Card>
-              </TouchableOpacity>
-            )}
-          />
-        </View>
-      ) : (
-        <View>
-          <Card>
-            <Text style={styles.email}>Username: {currentUser.username}</Text>
-            <Text style={styles.email}>Email: {currentUser.email}</Text>
-            {/* <View style={styles.border} /> */}
-          </Card>
-        </View>
-      )}
-    </View>
+    <ImageBackground
+      source={require("../../assets/greyBackground.jpg")}
+      style={styles.background}
+    >
+      <View style={globalStyles.container}>
+        {/* The onpress to true is open the modal  */}
+        {currentUser.rank === "admin" ? (
+          <View>
+            <SearchBar
+              onChangeText={updateSearch}
+              value={search}
+              placeholder="Search for users..."
+              style={styles.searchBar}
+            />
+            <FlatList
+              style={{ marginTop: 20 }}
+              data={filteredUsers}
+              keyExtractor={item => item.username}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("UserDetails", { item, handleDelete })
+                  }
+                >
+                  <Card>
+                    <Text style={globalStyles.titleText}>{item.username}</Text>
+                  </Card>
+                </TouchableOpacity>
+              )}
+            />
+          </View>
+        ) : (
+          <View>
+            <Card>
+              <Text style={styles.email}>Username: {currentUser.username}</Text>
+              <Text style={styles.email}>Email: {currentUser.email}</Text>
+              {/* <View style={styles.border} /> */}
+            </Card>
+          </View>
+        )}
+      </View>
+    </ImageBackground>
   );
 }
 
@@ -294,5 +301,12 @@ const styles = StyleSheet.create({
     marginTop: 10,
     flexDirection: "row",
     justifyContent: "space-around"
+  },
+  background: {
+    width: "100%",
+    height: "100%"
+  },
+  searchBar: {
+    color: "white"
   }
 });

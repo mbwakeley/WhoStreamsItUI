@@ -25,7 +25,7 @@ const initialState = {
     username: "Darvidicus",
     email: "Darvidicus@overwatch.com",
     password: "Junkrat123",
-    rank: "user"
+    rank: "admin"
   }
 };
 

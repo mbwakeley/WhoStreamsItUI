@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { ImageBackground, StyleSheet, View, Text } from "react-native";
 import { globalStyles } from "../../styles/global";
 import Card from "../../shared/card";
 import DeleteButton from "../../shared/DeleteButton";
@@ -45,20 +45,27 @@ export default function ShowUpdateDetails({ navigation }) {
   };
 
   return (
-    <View style={globalStyles.container}>
-      {/* {navigation.getParam("title")} is pretty much the same as prosp.reviews.title */}
+    <ImageBackground
+      source={require("../../assets/greyBackground.jpg")}
+      style={styles.background}
+    >
+      <View style={globalStyles.container}>
+        {/* {navigation.getParam("title")} is pretty much the same as prosp.reviews.title */}
 
-      <Card>
-        <Text style={styles.showTitle}>{updateByShow.title}</Text>
-        <Text style={styles.username}>{updateByUser.username}</Text>
-        {/* <View style={styles.border} /> */}
-        <Text style={globalStyles.titleText}>{item.content}</Text>
-        <View />
-        <View style={styles.buttonView}>
-          <DeleteButton text="Delete" onPress={() => handleBoth()} />
-        </View>
-      </Card>
-    </View>
+        <Card>
+          <Text style={styles.showTitle}>Show:</Text>
+          <Text style={styles.showTitle}>{updateByShow.title}</Text>
+          <Text style={styles.username}>Submitted By:</Text>
+          <Text style={styles.username}>{updateByUser.username}</Text>
+          {/* <View style={styles.border} /> */}
+          <Text style={globalStyles.titleText}>Recommended Update:</Text>
+          <Text style={globalStyles.titleText}>{item.content}</Text>
+          <View style={styles.buttonView}>
+            <DeleteButton text="Delete" onPress={() => handleBoth()} />
+          </View>
+        </Card>
+      </View>
+    </ImageBackground>
   );
 }
 const styles = StyleSheet.create({
@@ -85,5 +92,9 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     alignSelf: "center"
+  },
+  background: {
+    width: "100%",
+    height: "100%"
   }
 });
