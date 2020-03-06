@@ -33,5 +33,9 @@ export const globalStyles = StyleSheet.create({
     marginBottom: 20,
     height: 20,
     width: 20
+  },
+  backgroundImage: {
+    width: "100%",
+    height: "100%"
   }
 });
