@@ -66,17 +66,17 @@ export default function Home({ navigation }) {
   // };
 
   //This is to delete show on the server side
-  // const handleDelete = id => {
-  //   dispatch(removeShow(id));
-  // };
+  const handleDelete = id => {
+    dispatch(removeShow(id));
+  };
 
   // This is to delete a show
   // This is on client side only
-  const handleDelete = id => {
-    setShows(prevShows => {
-      return prevShows.filter(show => show.id != id);
-    });
-  };
+  // const handleDelete = id => {
+  //   setShows(prevShows => {
+  //     return prevShows.filter(show => show.id != id);
+  //   });
+  // };
 
   const [shows, setShows] = useState([
     {
