@@ -7,7 +7,7 @@ export default function DeleteButton({ text, onPress }) {
     <TouchableOpacity onPress={onPress}>
       <View>
         <LinearGradient
-          colors={["#f85032", "#f16f5c", "#f02f17", "#e73827"]}
+          colors={["#9f0d0d", "#b61c1c", "#ce2828"]}
           style={styles.button}
         >
           <Text style={styles.buttonText}>{text}</Text>
