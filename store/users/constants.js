@@ -18,4 +18,4 @@ export const EDIT_USER_SUCCESS = "EDIT_USER_SUCCESS";
 export const EDIT_USER_FAILED = "EDIT_USER_FAILED";
 export const EDIT_USER_PENDING = "EDIT_USER_PENDING";
 
-export const BASE_URL = "http://192.168.1.2:8000/users";
+export const BASE_URL = "http://192.168.1.10:8000/users";

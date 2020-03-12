@@ -4,6 +4,7 @@ import HomeStack from "./homeStack";
 import MovieStack from "./MovieStack";
 import UserStack from "./UserStack";
 import ShowUpdateStack from "./ShowUpdateStack";
+
 const RootDrawerNavigator = createDrawerNavigator({
   Home: {
     screen: HomeStack

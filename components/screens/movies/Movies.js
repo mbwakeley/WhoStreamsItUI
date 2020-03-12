@@ -10,43 +10,41 @@ import {
   Keyboard,
   Image
 } from "react-native";
-import { globalStyles } from "../styles/global";
+import { globalStyles } from "../../styles/global";
 import { MaterialIcons } from "@expo/vector-icons";
-import NewShowForm from "./NewShowForm";
+import NewMovieForm from "./NewMovieForm";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  fetchAllShows,
-  removeShow,
-  addNewShow
-} from "../../store/shows/actions";
+  fetchAllMovies,
+  removeMovie,
+  addNewMovie
+} from "../../../store/movies/actions";
 
-export default function Home({ navigation }) {
+export default function Movies({ navigation }) {
   const [modalOpen, setModalOpen] = useState(false);
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.users.loggedInUser);
 
   useEffect(() => {
-    dispatch(fetchAllShows());
+    dispatch(fetchAllMovies());
   }, [dispatch]);
 
-  //this will get all shows
-  const shows = useSelector(state => state.shows.all);
+  const movies = useSelector(state => state.movies.all);
+  console.log("movies1234", movies);
 
-  // This is to add a show
-  const addShow = show => {
-    dispatch(addNewShow(show));
+  const addMovie = movie => {
+    dispatch(addNewMovie(movie));
     setModalOpen(false);
   };
 
-  //This is to delete show on the server side
   const handleDelete = id => {
-    dispatch(removeShow(id));
+    dispatch(removeMovie(id));
   };
 
   if (currentUser.rank === "admin") {
     return (
       <ImageBackground
-        source={require("../assets/greyBackground.jpg")}
+        source={require("../../assets/greyBackground.jpg")}
         style={styles.background}
       >
         <View style={globalStyles.container}>
@@ -59,7 +57,7 @@ export default function Home({ navigation }) {
                   style={{ ...styles.modalToggle, ...styles.modalClose }}
                   onPress={() => setModalOpen(false)} //This is to close the modal my setting the usestate to false
                 />
-                <NewShowForm addShow={addShow} />
+                <NewMovieForm addMovie={addMovie} />
               </View>
             </TouchableWithoutFeedback>
           </Modal>
@@ -71,13 +69,13 @@ export default function Home({ navigation }) {
             onPress={() => setModalOpen(true)}
           />
           <FlatList
-            data={shows}
+            data={movies}
             numColumns={3}
             keyExtractor={item => item.image}
             renderItem={({ item }) => (
               <TouchableOpacity
                 onPress={() =>
-                  navigation.navigate("ShowDetails", {
+                  navigation.navigate("MovieDetails", {
                     item,
                     handleDelete
                   })
@@ -97,18 +95,18 @@ export default function Home({ navigation }) {
   } else {
     return (
       <ImageBackground
-        source={require("../assets/greyBackground.jpg")}
+        source={require("../../assets/greyBackground.jpg")}
         style={styles.background}
       >
         <View style={globalStyles.container}>
           <FlatList
-            data={shows}
+            data={movies}
             numColumns={3}
             keyExtractor={item => item.image}
             renderItem={({ item }) => (
               <TouchableOpacity
                 onPress={() =>
-                  navigation.navigate("ShowDetails", {
+                  navigation.navigate("MovieDetails", {
                     item,
                     handleDelete
                   })

@@ -1,7 +1,8 @@
 import { createStackNavigator } from "react-navigation-stack";
 import React from "react";
 import Header from "../shared/header";
-import Movies from "../screens/Movies";
+import Movies from "../screens/movies/Movies";
+import MovieDetails from "../screens/movies/MovieDetails";
 
 const screens = {
   Movies: {
@@ -12,6 +13,12 @@ const screens = {
           <Header title="Who Streams It?" navigation={navigation} />
         )
       };
+    }
+  },
+  MovieDetails: {
+    screen: MovieDetails,
+    navigationOptions: {
+      title: "Movie Details"
     }
   }
 };

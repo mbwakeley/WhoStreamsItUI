@@ -10,25 +10,24 @@ import {
   Image,
   ScrollView
 } from "react-native";
-import { globalStyles } from "../styles/global";
-import Card from "../shared/card";
+import { globalStyles } from "../../styles/global";
+import Card from "../../shared/card";
 import { MaterialIcons } from "@expo/vector-icons";
-import DeleteButton from "../shared/DeleteButton";
-import EditButton from "../shared/EditButton";
-import EditShowForm from "./EditShowForm";
-import FlatButton from "../shared/FlatButton";
+import DeleteButton from "../../shared/DeleteButton";
+import EditButton from "../../shared/EditButton";
+import EditMovieForm from "./EditMovieForm";
+import FlatButton from "../../shared/FlatButton";
 import { useDispatch, useSelector } from "react-redux";
-import { editShow } from "../../store/shows/actions";
-import NewShowUpdateForm from "../screens/showupdates/NewShowUpdateForm";
-import { addNewShowUpdate } from "../../store/showupdates/actions";
+import { editMovie } from "../../../store/movies/actions";
+// import { addNewMovieUpdate } from "../../../store/Movieupdates/actions";
 
-export default function ShowDetails({ navigation }) {
+export default function MovieDetails({ navigation }) {
   const [modalOpen, setModalOpen] = useState(false);
   const item = navigation.getParam("item");
   const handleDelete = navigation.getParam("handleDelete");
   const dispatch = useDispatch();
   const id = item.id;
-  console.log(id, handleDelete, editOneShow, "navigation");
+  console.log(item, handleDelete, editOneMovie, "navigation");
   const currentUser = useSelector(state => state.users.loggedInUser);
 
   const handleBoth = () => {
@@ -36,23 +35,17 @@ export default function ShowDetails({ navigation }) {
     navigation.pop();
   };
 
-  const editOneShow = (updatedShow, id) => {
-    console.log(updatedShow, "updatedshow showdetails conponent");
-    dispatch(editShow(updatedShow, id));
+  const editOneMovie = (updatedMovie, id) => {
+    console.log(updatedMovie, "updatedMovie Moviedetails conponent");
+    dispatch(editMovie(updatedMovie, id));
     setModalOpen(false);
     navigation.pop();
-  };
-  console.log("item", item.id);
-
-  const addShowUpdate = newShowUpdate => {
-    dispatch(addNewShowUpdate(newShowUpdate));
-    setModalOpen(false);
   };
 
   if (currentUser.rank === "admin") {
     return (
       <ImageBackground
-        source={require("../assets/greyBackground.jpg")}
+        source={require("../../assets/greyBackground.jpg")}
         style={styles.background}
       >
         <View style={globalStyles.container}>
@@ -65,7 +58,7 @@ export default function ShowDetails({ navigation }) {
                   style={{ ...styles.modalToggle, ...styles.modalClose }}
                   onPress={() => setModalOpen(false)} //This is to close the modal my setting the usestate to false
                 />
-                <EditShowForm editOneShow={editOneShow} item={item} />
+                <EditMovieForm editOneMovie={editOneMovie} item={item} />
               </View>
             </TouchableWithoutFeedback>
           </Modal>
@@ -77,8 +70,8 @@ export default function ShowDetails({ navigation }) {
                 source={{ uri: item.image }}
                 resizeMode="contain"
               />
-              <Text style={styles.showTitle}>{item.title}</Text>
-              <Text style={styles.showGenre}>{item.genre}</Text>
+              <Text style={styles.movieTitle}>{item.title}</Text>
+              <Text style={styles.movieGenre}>{item.genre}</Text>
               {/* <View style={styles.border} /> */}
               <Text style={globalStyles.titleText}>{item.description}</Text>
               <View />
@@ -95,23 +88,10 @@ export default function ShowDetails({ navigation }) {
   } else {
     return (
       <ImageBackground
-        source={require("../assets/greyBackground.jpg")}
+        source={require("../../assets/greyBackground.jpg")}
         style={styles.background}
       >
         <View style={globalStyles.container}>
-          <Modal visible={modalOpen} animationType="slide">
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-              <View style={styles.modalContent}>
-                <MaterialIcons
-                  name="close"
-                  size={24}
-                  style={{ ...styles.modalToggle, ...styles.modalClose }}
-                  onPress={() => setModalOpen(false)} //This is to close the modal my setting the usestate to false
-                />
-                <NewShowUpdateForm addShowUpdate={addShowUpdate} item={item} />
-              </View>
-            </TouchableWithoutFeedback>
-          </Modal>
           {/* {navigation.getParam("title")} is pretty much the same as prosp.reviews.title */}
           <ScrollView>
             <Card>
@@ -120,18 +100,12 @@ export default function ShowDetails({ navigation }) {
                 source={{ uri: item.image }}
                 resizeMode="contain"
               />
-              <Text style={styles.showTitle}>{item.title}</Text>
-              <Text style={styles.showGenre}>{item.genre}</Text>
+              <Text style={styles.movieTitle}>{item.title}</Text>
+              <Text style={styles.movieGenre}>{item.genre}</Text>
               {/* <View style={styles.border} /> */}
               <Text style={globalStyles.titleText}>{item.description}</Text>
               <View />
               <Text style={globalStyles.titleText}>{item.platform}</Text>
-              <View style={styles.buttonView}>
-                <FlatButton
-                  text="Submit Update Request"
-                  onPress={() => setModalOpen(true)}
-                />
-              </View>
             </Card>
           </ScrollView>
         </View>
@@ -141,11 +115,11 @@ export default function ShowDetails({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  showTitle: {
+  movieTitle: {
     fontSize: 30,
     color: "#333"
   },
-  showGenre: {
+  movieGenre: {
     fontSize: 25,
     color: "#333"
   },
