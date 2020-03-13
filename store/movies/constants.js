@@ -18,4 +18,4 @@ export const EDIT_MOVIE_SUCCESS = "EDIT_MOVIE_SUCCESS";
 export const EDIT_MOVIE_FAILED = "EDIT_MOVIE_FAILED";
 export const EDIT_MOVIE_PENDING = "EDIT_MOVIE_PENDING";
 
-export const BASE_URL = "http://192.168.1.10:8000/movies";
+export const BASE_URL = "http://192.168.1.2:8000/movies";

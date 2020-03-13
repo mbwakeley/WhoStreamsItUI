@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
+  ImageBackground,
   View,
   Text,
   TouchableOpacity,
@@ -38,31 +39,36 @@ export default function UserDetails({ navigation }) {
   };
 
   return (
-    <View style={globalStyles.container}>
-      <Modal visible={modalOpen} animationType="slide">
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View style={styles.modalContent}>
-            <MaterialIcons
-              name="close"
-              size={24}
-              style={{ ...styles.modalToggle, ...styles.modalClose }}
-              onPress={() => setModalOpen(false)} //This is to close the modal my setting the usestate to false
-            />
-            <EditUserForm editOneUser={editOneUser} item={item} />
+    <ImageBackground
+      source={require("../../assets/greyBackground.jpg")}
+      style={styles.background}
+    >
+      <View style={globalStyles.container}>
+        <Modal visible={modalOpen} animationType="slide">
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={styles.modalContent}>
+              <MaterialIcons
+                name="close"
+                size={24}
+                style={{ ...styles.modalToggle, ...styles.modalClose }}
+                onPress={() => setModalOpen(false)} //This is to close the modal my setting the usestate to false
+              />
+              <EditUserForm editOneUser={editOneUser} item={item} />
+            </View>
+          </TouchableWithoutFeedback>
+        </Modal>
+        <Card>
+          <Text style={styles.email}>Username: {item.username}</Text>
+          <Text style={styles.email}>Email: {item.email}</Text>
+          {/* <View style={styles.border} /> */}
+          <Text style={styles.email}>Rank: {item.rank}</Text>
+          <View style={styles.buttonView}>
+            <EditButton text="Edit" onPress={() => setModalOpen(true)} />
+            <DeleteButton text="Delete" onPress={() => handleBoth()} />
           </View>
-        </TouchableWithoutFeedback>
-      </Modal>
-      <Card>
-        <Text style={styles.email}>Username: {item.username}</Text>
-        <Text style={styles.email}>Email: {item.email}</Text>
-        {/* <View style={styles.border} /> */}
-        <Text style={styles.email}>Rank: {item.rank}</Text>
-        <View style={styles.buttonView}>
-          <EditButton text="Edit" onPress={() => setModalOpen(true)} />
-          <DeleteButton text="Delete" onPress={() => handleBoth()} />
-        </View>
-      </Card>
-    </View>
+        </Card>
+      </View>
+    </ImageBackground>
   );
 }
 
@@ -94,5 +100,9 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     alignSelf: "center"
+  },
+  background: {
+    width: "100%",
+    height: "100%"
   }
 });

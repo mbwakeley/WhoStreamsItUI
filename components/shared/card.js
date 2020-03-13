@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 
-// from tutoial 26, the Card component is because there is not a card in the library so you have create one with the styles.
 export default function Card(props) {
   return (
     <View style={styles.card}>

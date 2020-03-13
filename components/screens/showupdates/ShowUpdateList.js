@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
+  ImageBackground,
   View,
   Text,
   TouchableOpacity,
@@ -30,41 +31,46 @@ export default function ShowUpdateList({ navigation }) {
   };
 
   return (
-    <View style={globalStyles.container}>
-      {/* The onpress to true is open the modal  */}
-      {currentUser.rank === "admin" ? (
-        <View>
-          <FlatList
-            style={{ marginTop: 20 }}
-            data={showUpdates}
-            keyExtractor={item => item.content}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate("ShowUpdateDetails", {
-                    item,
-                    handleDelete
-                  })
-                }
-              >
-                <Card>
-                  <Text style={globalStyles.titleText}>{item.content}</Text>
-                </Card>
-              </TouchableOpacity>
-            )}
-          />
-        </View>
-      ) : (
-        <View>
-          <Card>
-            <Text style={styles.email}>
-              Do you have recommendations? Select the show you would like
-              recommend changes to and submit your request.
-            </Text>
-          </Card>
-        </View>
-      )}
-    </View>
+    <ImageBackground
+      source={require("../../assets/greyBackground.jpg")}
+      style={styles.background}
+    >
+      <View style={globalStyles.container}>
+        {/* The onpress to true is open the modal  */}
+        {currentUser.rank === "admin" ? (
+          <View>
+            <FlatList
+              style={{ marginTop: 20 }}
+              data={showUpdates}
+              keyExtractor={item => item.content}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("ShowUpdateDetails", {
+                      item,
+                      handleDelete
+                    })
+                  }
+                >
+                  <Card>
+                    <Text style={globalStyles.titleText}>{item.content}</Text>
+                  </Card>
+                </TouchableOpacity>
+              )}
+            />
+          </View>
+        ) : (
+          <View>
+            <Card>
+              <Text style={styles.email}>
+                Do you have recommendations? Select the show you would like
+                recommend changes to and submit your request.
+              </Text>
+            </Card>
+          </View>
+        )}
+      </View>
+    </ImageBackground>
   );
 }
 
@@ -72,5 +78,9 @@ const styles = StyleSheet.create({
   email: {
     fontSize: 15,
     color: "#333"
+  },
+  background: {
+    width: "100%",
+    height: "100%"
   }
 });
